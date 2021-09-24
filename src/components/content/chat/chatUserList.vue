@@ -3,7 +3,7 @@
     <div class="title">用户列表:</div>
     <div class="content">
       <ul>
-        <li v-for="(item, index) in userListdata" @click="userChange(item.name)" :key="index">
+        <li v-for="(item, index) in userListdata" @click="userChange(item)" :key="index">
           <img :src="item.url" alt />
           <p>{{ item.name }}</p>
         </li>
@@ -15,11 +15,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { ChatModule } from '@/store/modules/chat'
-
-type UserData = {
-  url: string;
-  name: string;
-}
+import { UserData } from '@/typesLibrary/chatTypes'
 
 @Component({
   components: {
@@ -43,13 +39,7 @@ export default class extends Vue {
     name: '美丽'
   }]
 
-  // private currentName = ''
-
-  created (): void {
-    // this.currentName = ChatModule.currentName
-  }
-
-  userChange (name: string): void {
+  userChange (name: UserData): void {
     // console.log(name)
     ChatModule.changeName(name)
   }
