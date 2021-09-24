@@ -23,5 +23,12 @@ export default class extends Vue {
 </script>
 
 <style scoped>
-
+  .chat {
+    width: 800px;
+    height: 800px;
+    border: 1px solid gray;
+    margin: 0 auto;
+    display: flex;
+    box-sizing: border-box;
+  }
 </style>
