@@ -4,7 +4,9 @@
       <span>{{ ChatModule.currentName }}</span>
     </div>
     <div class="contList">
-      <chatListIiem></chatListIiem>
+      <div  v-for="(item, index) in currentChatRecord"  :key="index">
+        <chatListIiem :item="item"></chatListIiem>
+      </div>
     </div>
     <chatSendCom></chatSendCom>
   </div>
@@ -27,6 +29,12 @@ import chatSendCom from '@/components/content/chat/chatSendCom.vue'
 export default class extends Vue {
   // 这里有一个很要注意的东西就是这个ts里面的响应式不是很深的那种，一定要注意这种坑，不一样的坑，就算是你自己知道了也是这样
   private ChatModule = ChatModule
+  // 主要还是这个map不是一个响应式的数据就有点问题了
+  private currentChatRecord = ChatModule.chatRecord.get(ChatModule.currentName) || []
+
+  // created () {
+  //   console.log(this.currentChatRecord)
+  // }
 }
 </script>
 
@@ -49,6 +57,9 @@ export default class extends Vue {
     .contList {
       width: 100%;
       height: 470px;
+      overflow-y: scroll;
+      padding: 30px 10px 10px 10px;
+      box-sizing: border-box;
     }
   }
 </style>

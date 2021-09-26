@@ -31,11 +31,11 @@ class User extends VuexModule implements currentUserState {
       // console.log(this.chatRecord)
       const arr: any[] = []
       if (!this.chatRecord.has(payload.name)) {
-        arr.push(payload.content)
+        arr.push(payload)
         this.chatRecord.set(this.currentName, arr)
       } else {
-        console.log(this.chatRecord.get(payload.name))
-        this.chatRecord.get(payload.name).push(payload.content)
+        // console.log(this.chatRecord.get(payload.name))
+        this.chatRecord.get(payload.name).push(payload)
       }
     }
 
