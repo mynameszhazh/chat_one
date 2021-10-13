@@ -15,3 +15,9 @@ export type UserInfo = {
   name: string;
   content: string
 }
+
+export interface UserListType {
+  userName: string;
+  age?: number;
+  headImg: string;
+}

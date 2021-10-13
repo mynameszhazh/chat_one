@@ -86,8 +86,9 @@ class HttpRequest {
         })
       }
     }
-    const { data } = await this._axiosInstance.post<CommonResult<T>>(url, config)
-    return data
+
+    // const { data } = await this._axiosInstance.post<CommonResult<T>>(url, config)
+    // return data
   }
 
   // 初始化axios
