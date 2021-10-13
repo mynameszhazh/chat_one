@@ -1,11 +1,13 @@
 <template>
   <div class="socketChat">
-    <userList v-if="isUserOnline" @select-user="selectUser" :user-lists="userLists"></userList>
+    <chooseUser v-if="isUserOnline" @select-user="selectUser" :user-lists="userLists"></chooseUser>
+    <userList v-else></userList>
   </div>
 </template>
 
 <script lang="ts">
-import userList from '@/views/socketChat/childcoms/userList'
+import chooseUser from '@/views/socketChat/childcoms/chooseUser.vue'
+import userList from '@/views/socketChat/childcoms/userList.vue'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { UserListType } from '@/typesLibrary/chatTypes'
 
@@ -13,6 +15,7 @@ import axios from 'axios'
 
 @Component({
   components: {
+    chooseUser,
     userList
   }
 })
@@ -29,7 +32,7 @@ export default class Home extends Vue {
 
   getUserList (): void {
     axios.get('http://localhost:3000/users/list').then(res => {
-      // console.log(res)
+      console.log(res)
       this.userLists = res.data
     })
   }

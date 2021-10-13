@@ -17,8 +17,7 @@ import chatwindow from '../components/content/chat/chatwindow.vue'
     chatwindow
   }
 })
-export default class extends Vue {
-
+export default class Chat extends Vue {
 }
 </script>
 
