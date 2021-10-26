@@ -1,7 +1,7 @@
 <template>
   <div class="chatUserList">
     <p class="title">请选择你要进行聊天的角色</p>
-    <div class="user-item" v-for="(item, index) in userLists" @click="selectUser(item.userName)" :key="index">
+    <div class="user-item" v-for="(item, index) in userLists" @click="selectUser(item)" :key="index">
       <img :src="item.headImg" alt="">
       <p>{{ item.userName }}</p>
     </div>
@@ -27,8 +27,8 @@ export default class ChooseUser extends Vue {
   }) private userLists!: UserListType[]
 
   @Emit()
-  selectUser (name: string): void {
-    localStorage.setItem('user', name)
+  selectUser (item: UserListType): void {
+    localStorage.setItem('user', item.userName)
   }
 }
 </script>

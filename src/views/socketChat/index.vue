@@ -1,7 +1,7 @@
 <template>
   <div class="socketChat">
     <chooseUser v-if="isUserOnline" @select-user="selectUser" :user-lists="userLists"></chooseUser>
-    <userList v-else></userList>
+    <userList v-else :current-user="currentUser" ></userList>
   </div>
 </template>
 
@@ -24,20 +24,28 @@ export default class Home extends Vue {
     {
       userName: '',
       age: 0,
-      headImg: ''
+      headImg: '',
+      isOnline: false
     }
   ]
 
-  currentUser: string | null = localStorage.getItem('user')
+  currentUser: UserListType = {
+    userName: '',
+    age: 0,
+    headImg: '',
+    isOnline: false
+  }
+
+  currentUserName: string | null = localStorage.getItem('user')
 
   getUserList (): void {
-    axios.get('http://localhost:3000/users/list').then(res => {
+    axios.get('http://localhost:3001/users/list').then(res => {
       console.log(res)
       this.userLists = res.data
     })
   }
 
-  @Watch('currentUser')
+  @Watch('currentUser.userName')
   currentUserChange (val: string): void {
     // console.log(val)
   }
@@ -47,14 +55,15 @@ export default class Home extends Vue {
     // console.log(localStorage.getItem('user'))
   }
 
-  selectUser (name) {
+  selectUser (item: UserListType) {
     // console.log(111)
-    // console.log(name)
-    this.currentUser = name
+    this.currentUser = item
+    this.currentUserName = item.userName
   }
 
   get isUserOnline (): boolean {
-    return this.currentUser === null
+    // console.log(localStorage.getItem('user') === null)
+    return this.currentUserName === null
   }
 }
 </script>

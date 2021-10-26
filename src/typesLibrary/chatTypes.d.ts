@@ -20,4 +20,5 @@ export interface UserListType {
   userName: string;
   age?: number;
   headImg: string;
+  isOnline: boolean
 }
