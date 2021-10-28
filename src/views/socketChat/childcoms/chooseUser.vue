@@ -28,7 +28,8 @@ export default class ChooseUser extends Vue {
 
   @Emit()
   selectUser (item: UserListType): void {
-    localStorage.setItem('user', item.userName)
+    const temp = JSON.stringify(item)
+    localStorage.setItem('user', temp)
   }
 }
 </script>

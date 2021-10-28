@@ -18,21 +18,12 @@ import { UserListType } from '@/typesLibrary/chatTypes'
   components: {}
 })
 export default class UserList extends Vue {
-  @Prop({
-    default () {
-      return {
-        userName: '',
-        age: 0,
-        headImg: '',
-        isOnline: false
-      }
-    }
-  }) private currentUser!: UserListType
+  // 这里出现了一个伏笔
+ public currentUser!: UserListType = JSON.parse(localStorage.getItem('user'))
 
-  created () {
-    console.log(this.currentUser)
-    socket.emit('login', { msg: '请求登录' })
-  }
+ created () {
+   socket.emit('login', { msg: '请求登录' })
+ }
 }
 </script>
 

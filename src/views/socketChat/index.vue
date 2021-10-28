@@ -1,7 +1,7 @@
 <template>
   <div class="socketChat">
     <chooseUser v-if="isUserOnline" @select-user="selectUser" :user-lists="userLists"></chooseUser>
-    <userList v-else :current-user="currentUser" ></userList>
+    <userList v-else ></userList>
   </div>
 </template>
 
@@ -40,7 +40,7 @@ export default class Home extends Vue {
 
   getUserList (): void {
     axios.get('http://localhost:3001/users/list').then(res => {
-      console.log(res)
+      // console.log(res)
       this.userLists = res.data
     })
   }
