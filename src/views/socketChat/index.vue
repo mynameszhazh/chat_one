@@ -1,7 +1,7 @@
 <template>
   <div class="socketChat">
     <chooseUser v-if="isUserOnline" @select-user="selectUser" :user-lists="userLists"></chooseUser>
-    <userList v-else ></userList>
+    <userList v-else  :user-lists="userLists"></userList>
   </div>
 </template>
 
