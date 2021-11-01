@@ -8,6 +8,7 @@
 <script lang="ts">
 import chooseUser from '@/views/socketChat/childcoms/chooseUser.vue'
 import userList from '@/views/socketChat/childcoms/userList.vue'
+import socket from '@/socket/chatSocket'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { UserListType } from '@/typesLibrary/chatTypes'
 
@@ -40,7 +41,6 @@ export default class Home extends Vue {
 
   getUserList (): void {
     axios.get('http://localhost:3001/users/list').then(res => {
-      // console.log(res)
       this.userLists = res.data
     })
   }
@@ -53,6 +53,10 @@ export default class Home extends Vue {
   created (): void {
     this.getUserList()
     // console.log(localStorage.getItem('user'))
+    socket.on('getUserList', data => {
+      console.log(111)
+      this.userLists = data
+    })
   }
 
   selectUser (item: UserListType) {

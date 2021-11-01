@@ -13,7 +13,8 @@
       </div>
       <div class="list">
         <ul>
-          <li v-for="(item, index) in newUserLists" @click="chooseUser(item)" :key="index">
+          <li v-for="(item, index) in newUserLists" @click="chooseUser(item)" :key="index"
+              :class="{filter: !item.isOnline}">
             <img :src="item.headImg" alt/>
             <p>{{ item.userName }}</p>
           </li>
@@ -56,7 +57,7 @@ export default class UserList extends Vue {
     })
   }
 
-  loginout (): void{
+  loginout (): void {
     if (this.currentUser.isOnline) {
       this.currentUser.isOnline = false
       socket.emit('loginout', this.currentUser)
@@ -93,8 +94,8 @@ export default class UserList extends Vue {
       }
     })
 
-    socket.on('loginout', data => {
-      console.log(data.content)
+    socket.on('loginout', () => {
+      // console.log(data.content)
       this.currentUser.isOnline = false
       socket.emit('loginout', { msg: '下线了' })
     })
@@ -161,7 +162,11 @@ export default class UserList extends Vue {
         &:hover {
           background-color: cornflowerblue;
         }
+
       }
+       .filter {
+          filter: grayscale(1);
+        }
     }
   }
 }
